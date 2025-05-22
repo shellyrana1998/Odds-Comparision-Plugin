@@ -3,7 +3,7 @@
  * Plugin Name: Advanced Odds Comparison
  * Description: Fetch and display live odds from multiple bookmakers with Gutenberg support.
  * Version: 1.0
- * Author: ChatGPT
+ * Author: Shelly Rana
  */
 
 if (!defined('ABSPATH')) exit;
