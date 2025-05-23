@@ -1,14 +1,22 @@
 <?php
 class AOC_Admin_Interface {
     public function __construct() {
+         // Hook into WordPress admin menu and init actions
         add_action('admin_menu', [$this, 'create_menu']);
         add_action('admin_init', [$this, 'register_settings']);
     }
-
+   // Creates a new admin menu item for Odds Settings
     public function create_menu() {
-        add_menu_page('Odds Settings', 'Odds Settings', 'manage_options', 'aoc-settings', [$this, 'settings_page']);
+        add_menu_page(
+            'Odds Settings',            // Page title
+            'Odds Settings',            // Menu title
+            'manage_options',           // Capability required to access
+            'aoc-settings',             // Menu slug
+            [$this, 'settings_page']    // Callback to render the settings page
+        );
     }
-
+    
+    // Registers settings so they can be saved via options.php
     public function register_settings() {
         register_setting('aoc-settings-group', 'aoc_api_key');
     register_setting('aoc-settings-group', 'aoc_region');
@@ -16,13 +24,15 @@ class AOC_Admin_Interface {
         register_setting('aoc-settings-group', 'aoc_selected_markets');
         register_setting('aoc-settings-group', 'aoc_bookmaker_links');
     }
-
+    // Renders the admin settings page UI
     public function settings_page() {
+        // Retrieve stored option values or use defaults
         $api_key = get_option('aoc_api_key', '');
         $selected_bookmakers = (array) get_option('aoc_selected_bookmakers', []);
         $selected_markets = (array) get_option('aoc_selected_markets', []);
         $bookmaker_links = get_option('aoc_bookmaker_links', []);
 
+        // Define available options
         $bookmakers = ['Bet365', 'William Hill', 'Ladbrokes', 'Unibet'];
         $markets = ['h2h', 'spreads', 'totals'];
         ?>
