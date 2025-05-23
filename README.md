@@ -29,15 +29,6 @@
   <li><strong>Bookmaker Links</strong> – Provide your custom affiliate URLs for each bookmaker.</li>
 </ul>
 
-<h2>📁 File Structure</h2>
-<pre>
-/aoc-odds-settings
-│
-├── aoc-admin-interface.php    ← Main class handling admin settings
-├── readme.md                  ← This file
-└── ... other plugin files
-</pre>
-
 <h2>📌 Notes</h2>
 <ul>
   <li>Ensure you have the required capability <code>manage_options</code> to access the settings.</li>
