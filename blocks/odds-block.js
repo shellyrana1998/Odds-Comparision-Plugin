@@ -1,28 +1,32 @@
 (function (blocks, editor, components, element) {
-    var el = element.createElement;  // Shortcut to create elements
+    var el = element.createElement; // Shortcut to create elements
     var InspectorControls = editor.InspectorControls; // Panel area in the editor sidebar
     var PanelBody = components.PanelBody; // A collapsible panel component
     var CheckboxControl = components.CheckboxControl; // Checkbox UI component
+
     // Registering a custom Gutenberg block
     blocks.registerBlockType('aoc/odds-comparison', {
-        title: 'Odds Comparison',  // Block title shown in the block inserter
-        icon: 'chart-line',      // Dashicon or custom icon
-        category: 'widgets',   // Category in which block appears
+        title: 'Odds Comparison',        // Block title shown in the block inserter
+        icon: 'chart-line',             // Dashicon or custom icon
+        category: 'widgets',            // Category in which block appears
         attributes: {
             selectedBookmakers: {
-                type: 'array', // Data type for storing selected bookmakers
-                default: []
+                type: 'array',          // Data type for storing selected bookmakers
+                default: []             // Default is an empty array
             }
         },
-         // Edit function for block editor UI
+
+        // Edit function for block editor UI
         edit: function (props) {
             var attributes = props.attributes;
             var setAttributes = props.setAttributes;
+
+            // Static list of available bookmakers
             var bookmakers = ['Bet365', 'William Hill', 'Ladbrokes', 'Unibet'];
 
-             // Static list of available bookmakers
+            // Return JSX-like virtual DOM
             return el("div", {},
-                el(InspectorControls, {},
+                el(InspectorControls, {}, // Sidebar inspector controls
                     el(PanelBody, { title: "Select Bookmakers" },
                         bookmakers.map(function (name) {
                             return el(CheckboxControl, {
@@ -33,16 +37,19 @@
                                     var updated = checked
                                         ? attributes.selectedBookmakers.concat(name)
                                         : attributes.selectedBookmakers.filter(function (b) { return b !== name; });
-                                    setAttributes({ selectedBookmakers: updated });
+
+                                    setAttributes({ selectedBookmakers: updated }); // Save updated selection
                                 }
                             });
                         })
                     )
                 ),
-             // Display selected bookmakers inside the editor
+
+                // Display selected bookmakers inside the editor
                 el("p", {}, "Selected bookmakers: " + attributes.selectedBookmakers.join(', '))
             );
         },
+
         // Save function is null — indicating a dynamic block rendered with PHP
         save: function () {
             return null;
