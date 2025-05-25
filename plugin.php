@@ -47,7 +47,7 @@ function aoc_editor_assets() {
 
 // This function creates the odds table on the frontend of the website
 function aoc_render_odds_block($attributes) {
-    $odds = AOC_Scraper::fetch_odds(); // Get odds from API
+    $odds = AOC_Scraper::fetch_odds(); // Get odds from API calling static method of aocscrappeclas
     ob_start(); // Start storing HTML output
 
     // Some simple styles for the table
@@ -77,7 +77,22 @@ function aoc_render_odds_block($attributes) {
             echo '<td>' . esc_html($entry['bookmaker']) . '</td>'; // Bookmaker name
             echo '<td>' . esc_html($entry['market']) . '</td>'; // Market name
             echo '<td>' . esc_html($entry['team']) . '</td>'; // Team name
-            echo '<td>' . esc_html($entry['odds']) . '</td>'; // Odds number
+            // Get user-selected format from settings (default = decimal)
+                $format = get_option('aoc_odds_format', 'decimal');
+
+                // Convert odds based on selected format
+                $odds_value = $entry['odds']; // assume incoming odds are in decimal
+
+                if ($format === 'fractional') {
+                    $odds_value = AOC_Odds_Converter::to_fractional((float) $odds_value);
+                } elseif ($format === 'american') {
+                    $odds_value = AOC_Odds_Converter::to_american((float) $odds_value);
+                } else {
+                    $odds_value = round((float) $odds_value, 2);
+                }
+
+                echo '<td>' . esc_html($odds_value) . '</td>';
+
 
             // Show link if it's there, otherwise show a dash
             if (!empty($entry['link']) && $entry['link'] !== '#') {
