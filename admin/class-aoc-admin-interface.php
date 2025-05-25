@@ -25,6 +25,8 @@ class AOC_Admin_Interface {
         register_setting('aoc-settings-group', 'aoc_selected_bookmakers');
         register_setting('aoc-settings-group', 'aoc_selected_markets');
         register_setting('aoc-settings-group', 'aoc_bookmaker_links');
+        register_setting('aoc-settings-group', 'aoc_odds_format');
+
     }
 
     // Renders the admin settings page UI
@@ -34,6 +36,7 @@ class AOC_Admin_Interface {
         $selected_bookmakers = (array) get_option('aoc_selected_bookmakers', []);
         $selected_markets = (array) get_option('aoc_selected_markets', []);
         $bookmaker_links = get_option('aoc_bookmaker_links', []);
+        
 
         // Define available options
         $bookmakers = ['Bet365', 'William Hill', 'Ladbrokes', 'Unibet'];
@@ -110,6 +113,21 @@ class AOC_Admin_Interface {
                             <?php endforeach; ?>
                         </td>
                     </tr>
+
+                    <!-- Odds Format Dropdown -->
+                    <tr>
+                        <th scope="row">Select Odds Format</th>
+                        <td>
+                            <select name="aoc_odds_format">
+                                <?php $format = get_option('aoc_odds_format', 'decimal'); ?>
+                                <option value="decimal" <?php selected($format, 'decimal'); ?>>Decimal</option>
+                                <option value="fractional" <?php selected($format, 'fractional'); ?>>Fractional</option>
+                                <option value="american" <?php selected($format, 'american'); ?>>American</option>
+                            </select>
+                        </td>
+                    </tr>
+
+
 
                 </table>
                 <?php submit_button(); // Renders a "Save Changes" button ?>
