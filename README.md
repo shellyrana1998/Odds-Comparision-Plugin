@@ -1,8 +1,8 @@
-<h2>🎯 AOC Odds Settings Plugin</h2>
+<h2>AOC Odds Settings Plugin</h2>
 
 <p>This WordPress plugin provides an admin interface to configure API settings, bookmakers, markets, and regional preferences for an odds comparison system.</p>
 
-<h2>🚀 Features</h2>
+<h2>Features</h2>
 <ul>
   <li>Admin menu for Odds Settings</li>
   <li>Region selector (US, UK, EU, AU)</li>
@@ -11,7 +11,7 @@
   <li>Assign custom affiliate links to each bookmaker</li>
 </ul>
 
-<h2>🛠️ Installation</h2>
+<h2>Installation</h2>
 <ol>
   <li>Download or clone the repository.</li>
   <li>Upload the plugin folder to the <code>/wp-content/plugins/</code> directory.</li>
@@ -19,7 +19,7 @@
   <li>Navigate to <strong>Odds Settings</strong> from the admin sidebar menu.</li>
 </ol>
 
-<h2>⚙️ Configuration</h2>
+<h2>Configuration</h2>
 <p>Fill out the following fields under <strong>Odds Settings</strong>:</p>
 <ul>
   <li><strong>API Key</strong> – Enter your sports data API key.</li>
